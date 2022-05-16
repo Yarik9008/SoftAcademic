@@ -53,10 +53,12 @@ class PULT_SerialPort:
         data = None
 
         while data == None or data == b'':
-            data = self.serial_port.readline()
+            try:
+                data = self.serial_port.readline()
+            except: pass
 
         try:
-            dataout = list(map(lambda x: float(x), str(data)[3:-4].split(', ')))
+            dataout = list(map(lambda x: float(x), str(data)[159:-4].split(', ')))
         except:
             self.logger.warning('Error converting data')
             return None
@@ -68,9 +70,12 @@ class PULT_SerialPort:
     def Control_tnpa(self, data:list=[0, 0, 0, 0, 0, 0, 90, 0, 0, 0]):
         global DEBUG
         '''отправка массива на аппарат'''
-        self.serial_port.write((f'{str(data)}\n').encode('utf-8'))
-        if DEBUG:
-            self.logger.debug('Send data: ' + str(data))
+        try:
+            self.serial_port.write((f'{str(data)}\n').encode('utf-8'))
+            if DEBUG:
+                self.logger.debug('Send data: ' + str(data))
+        except:
+            self.logger.warning('Error send data')
 
 test_log = PULT_Logging()
 test_pult = PULT_SerialPort()
@@ -78,4 +83,5 @@ test_pult = PULT_SerialPort()
 if __name__ == '__main__':
     while True:
         test_pult.Control_tnpa()
+        print('In', test_pult.Receiver_tnpa())
         sleep(1)

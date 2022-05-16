@@ -24,8 +24,12 @@ class TNPA_SerialPort:
         '''прием информации с поста управления'''
         data = None
         while data == None or data == b'':
-            data = self.serial_port.read(100)
+            try:
+                data = self.serial_port.read(100)
+            except: pass
+
         print(data)
+
         try:
             return list(map(lambda x: float(x), str(data)[3:-4].split(', ')))
         except:
@@ -33,7 +37,9 @@ class TNPA_SerialPort:
         
     def dispatch_data(self, data: list = [0, 0, 0, 0, 0]):
         '''Отправка телеметрии на пост управления'''
-        self.serial_port.write((f'{str(data)}\n').encode())
+        try:
+            self.serial_port.write((f'{str(data)}\n').encode())
+        except: pass
 
 
 test_tnpa = TNPA_SerialPort()
