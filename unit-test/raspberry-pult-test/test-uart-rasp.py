@@ -58,6 +58,7 @@ class PULT_SerialPort:
             except: pass
 
         try:
+            print(str(data)[159:-4])
             dataout = list(map(lambda x: float(x), str(data)[159:-4].split(', ')))
         except:
             self.logger.warning('Error converting data')
