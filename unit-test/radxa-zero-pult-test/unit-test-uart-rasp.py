@@ -55,11 +55,12 @@ class PULT_SerialPort:
         while data == None or data == b'':
             try:
                 data = self.serial_port.readline()
+                print(str(data.decode('utf-8')))
             except: pass
 
         try:
-            print(str(data.decode('utf-8'))[3:-4])
-            dataout = list(map(lambda x: float(x), str(data.decode('utf-8'))[3:-4].split(', ')))
+            
+            dataout = list(map(lambda x: float(x), str(data)[3:-4].split(', ')))
         except:
             self.logger.warning('Error converting data')
             return None
@@ -85,4 +86,4 @@ if __name__ == '__main__':
     while True:
         test_pult.Control_tnpa()
         print('In', test_pult.Receiver_tnpa())
-        sleep(1)
+        sleep(0.5)

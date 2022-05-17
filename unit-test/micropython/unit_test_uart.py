@@ -42,7 +42,7 @@ class TNPA_SerialPort:
         '''Отправка телеметрии на пост управления'''
         try:
             if self.check_cor:
-                self.serial_port.write((f'{str(data)}\n').encode())
+                self.serial_port.write((f'{str(data)}\n').encode('utf-8'))
         except: pass
 
 
