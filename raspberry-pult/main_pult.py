@@ -249,13 +249,13 @@ class PULT_SerialPort:
         '''прием информации с аппарата'''
         data = None
 
-        while data == None or data == b'' or data == b'\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff':
+        while data == None or data == b'':
             data = self.serial_port.readline()
 
         try:
             print(data)
             dataout = list(
-                map(lambda x: float(x), str(data)[159:-4].split(', ')))
+                map(lambda x: float(x), str(data)[3:-4].split(', ')))
         except:
             self.logger.warning('Error converting data')
             return None
