@@ -3,7 +3,7 @@ import coloredlogs
 from datetime import datetime
 
 
-PATH_LOG = '/home/rock/SoftAcademic/unit-test/raspberry-pult-test/log' + \
+PATH_LOG = '/home/rock/SoftAcademic/unit-test/raspberry-pult-test/log/' + \
             '-'.join('-'.join('-'.join(str(datetime.now()).split()
                                        ).split('.')).split(':')) + '.log'
 
