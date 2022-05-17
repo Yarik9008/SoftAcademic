@@ -18,7 +18,8 @@ DEBUG = False
 class TNPA_SerialPort:
     def __init__(self):
         self.serial_port = UART(0, baudrate=115200, tx=Pin(16), rx=Pin(17))
-
+        self.check_cor = False
+        
     def receiver_data(self):
         global DEBUG
         '''прием информации с поста управления'''
@@ -31,14 +32,17 @@ class TNPA_SerialPort:
         print(data)
 
         try:
+            self.check_cor = True
             return list(map(lambda x: float(x), str(data)[3:-4].split(', ')))
         except:
+            self.check_cor = False
             return None
         
-    def dispatch_data(self, data: list = [0, 0, 0, 0, 0]):
+    def dispatch_data(self, data: list = [12.6, 0.3, 180, -163, 20]):
         '''Отправка телеметрии на пост управления'''
         try:
-            self.serial_port.write((f'{str(data)}\n').encode())
+            if self.check_cor:
+                self.serial_port.write((f'{str(data)}\n').encode())
         except: pass
 
 
