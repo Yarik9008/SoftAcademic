@@ -53,13 +53,11 @@ class PULT_SerialPort:
         data = None
 
         while data == None or data == b'':
-            try:
-                data = self.serial_port.readline()
-            except: pass
-            print(data)
+            data = self.serial_port.readline()
+            
+        print(data)
 
         try:
-            
             dataout = list(map(lambda x: float(x), str(data)[3:-4].split(', ')))
         except:
             self.logger.warning('Error converting data')
