@@ -46,7 +46,6 @@ test_tnpa = TNPA_SerialPort()
 while True:
     data = test_tnpa.receiver_data()
     print(data)
-    sleep(0.1)
     test_tnpa.dispatch_data()
 
 # протестированно

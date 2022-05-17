@@ -253,7 +253,7 @@ class PULT_SerialPort:
             data = self.serial_port.readline()
 
         try:
-            print(data)
+            #print(data)
             dataout = list(
                 map(lambda x: float(x), str(data)[3:-4].split(', ')))
         except:
