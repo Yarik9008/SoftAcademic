@@ -253,6 +253,7 @@ class PULT_SerialPort:
         while data == None or data == b'':
             try:
                 data = self.serial_port.readline()
+                print(data)
             except: pass
 
         try:
