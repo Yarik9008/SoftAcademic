@@ -26,8 +26,7 @@ class TNPA_SerialPort:
         data = None
         while data == None or data == b'':
             try:
-                data = self.serial_port.read(256)
-                print(data)
+                data = self.serial_port.read(100)
             except: pass
 
         try:

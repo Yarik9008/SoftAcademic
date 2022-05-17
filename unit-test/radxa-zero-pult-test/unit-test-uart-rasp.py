@@ -55,8 +55,8 @@ class PULT_SerialPort:
         while data == None or data == b'':
             try:
                 data = self.serial_port.readline()
-                print(str(data.decode('utf-8')))
             except: pass
+            print(data)
 
         try:
             
@@ -73,7 +73,7 @@ class PULT_SerialPort:
         global DEBUG
         '''отправка массива на аппарат'''
         try:
-            self.serial_port.write((f'{str(data)}\n').encode('utf-8'))
+            self.serial_port.write((f'{str(data)}\n').encode())
             if DEBUG:
                 self.logger.debug('Send data: ' + str(data))
         except:
