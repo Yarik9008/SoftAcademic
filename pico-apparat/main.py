@@ -38,7 +38,8 @@ class TNPA_SerialPort:
             try:
                 data = self.serial_port.read(100)
             except: pass
-        #print(data)
+
+
         try:
             self.check_cor = True
             return list(map(lambda x: float(x), str(data)[3:-4].split(', ')))
@@ -46,6 +47,7 @@ class TNPA_SerialPort:
         except:
             self.check_cor = False
             return None
+            
     def dispatch_data(self, data: list = [0, 0, 0, 0]):
         '''Отправка телеметрии на пост управления'''
         try:

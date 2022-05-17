@@ -251,22 +251,18 @@ class PULT_SerialPort:
         data = None
 
         while data == None or data == b'':
-            try:
-                data = self.serial_port.readline()
-                print(data)
-            except: pass
+            data = self.serial_port.readline()
 
         try:
             dataout = list(
                 map(lambda x: float(x), str(data)[3:-4].split(', ')))
-            self.check_cor = True
         except:
             self.logger.warning('Error converting data')
-            self.check_cor = False
             return None
 
         if DEBUG:
             self.logger.debug(f'Receiver data : {str(data)}')
+            
         return dataout
 
     def Control_tnpa(self, data: list = [50, 50, 50, 50, 50, 50, 90, 0, 0, 0]):
