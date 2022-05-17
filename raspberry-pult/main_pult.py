@@ -243,6 +243,7 @@ class PULT_SerialPort:
             port=port,
             baudrate=bitrate,
             timeout=0.1)
+        self.check_cor = False
 
     def Receiver_tnpa(self):
         global DEBUG
@@ -250,14 +251,17 @@ class PULT_SerialPort:
         data = None
 
         while data == None or data == b'':
-            data = self.serial_port.readline()
+            try:
+                data = self.serial_port.readline()
+            except: pass
 
         try:
-            #print(data)
             dataout = list(
                 map(lambda x: float(x), str(data)[3:-4].split(', ')))
+            self.check_cor = True
         except:
             self.logger.warning('Error converting data')
+            self.check_cor = False
             return None
 
         if DEBUG:
@@ -267,9 +271,12 @@ class PULT_SerialPort:
     def Control_tnpa(self, data: list = [50, 50, 50, 50, 50, 50, 90, 0, 0, 0]):
         global DEBUG
         '''отправка массива на аппарат'''
-        self.serial_port.write((f'{str(data)}\n').encode())
-        if DEBUG:
-            self.logger.debug('Send data: ' + str(data))
+        try:
+            self.serial_port.write((f'{str(data)}\n').encode())
+            if DEBUG:
+                self.logger.debug('Send data: ' + str(data))
+        except:
+            self.logger.warning('Error send data')
 
 
 class PULT_Main:
