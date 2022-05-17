@@ -7,7 +7,7 @@
     5) дождитесь пока закончиться запись и одноплатник стане определяться как usb накопитель 
     6) отворматируйте появившийся диск 
     7) запустите программу balenaEtcher-Setup-1.7.9
-    8) выберете дистрибутиа линукса 
+    8) выберете дистрибутиа линукса radxa-zero-ubuntu-focal-server-arm64-20211120-1315-mbr.img
     9) выбирите usb накопитель который вы отформатировали 
     10) запустите запись образа и дожитесь заверщения загрузки
     11) после завершения загрузки отсоедините от пк одноплатник 
@@ -20,6 +20,7 @@
     sudo apt-get update
 
     0) если есть необходимость в подключении к WIFI
+
         nmcli r wifi on
 
         nmcli dev wifi
@@ -29,6 +30,9 @@
         ifconfig
 
     1) скачивание репозитория 
+
+        sudo apt install git-all
+
         git clone https://github.com/Yarik9008/SoftAcademic
 
     2) установка библиотеки для джойстика 
@@ -39,16 +43,34 @@
         sudo pip3 install pyserial
 
     3) подключение джойстика 
-        sudo armbian-config
+        # перевести джойстик в режим сопряжения 
 
-        #обновить драйвера блютуса 
-        #подключть через кнопку джойстик 
-    
+        bluetoothctl
+
+        power on 
+
+        agent on
+ 
+        default-agent
+ 
+        scan on
+ 
+        pair <mac>
+ 
+        connect <mac>
+ 
+        trust <>
+
     4) включение uart
+
         sudo nano /boot/uEnv.txt
+        
+        # заменить следующие строки 
+        overlays=meson-g12a-uart-ao-a-on-gpioao-0-gpioao-1 meson-g12a-uart-ao-b-on-gpioao-2-gpioao-3
+        console=
 
 
 3) добавление в автозапуск 
-    crontab -e 
+    sudo crontab -e 
     1
-    @reboot sleep 10 && /usr/bin/python3 /home/rock/SoftAcademic/raspberry-pult/main_pult.py &
+    @reboot sleep 5 && /usr/bin/python3 /home/rock/SoftAcademic/raspberry-pult/main_pult.py &
