@@ -58,8 +58,8 @@ class PULT_SerialPort:
             except: pass
 
         try:
-            print(str(data)[3:-4])
-            dataout = list(map(lambda x: float(x), str(data)[3:-4].split(', ')))
+            print(str(data.decode('utf-8'))[3:-4])
+            dataout = list(map(lambda x: float(x), str(data.decode('utf-8'))[3:-4].split(', ')))
         except:
             self.logger.warning('Error converting data')
             return None
