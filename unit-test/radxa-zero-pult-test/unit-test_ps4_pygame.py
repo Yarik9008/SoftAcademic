@@ -132,7 +132,7 @@ class PULT_Controller():
 
 if __name__ == '__main__':
     config = configparser.ConfigParser()
-    config.read('/home/rock/SoftAcademic/unit-test/raspberry-pult-test/config_rov.ini')
+    config.read('/home/rock/SoftAcademic/unit-test/radxa-zero-pult-test/config_rov.ini')
 
     controller = PULT_Controller(config)
     controller.listen()
