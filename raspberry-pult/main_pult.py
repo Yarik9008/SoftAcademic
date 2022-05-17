@@ -8,8 +8,8 @@ from datetime import datetime
 import serial
 
 DEBUG = False
-PATH_CONFIG = '/root/SoftAcademic/raspberry-pult/config_rov.ini'
-PATH_LOG = '/root/SoftAcademic/raspberry-pult/log/PULT_LOG_' + \
+PATH_CONFIG = '/home/rock/SoftAcademic/raspberry-pult/config_rov.ini'
+PATH_LOG = '/home/rock/SoftAcademic/raspberry-pult/log/PULT_LOG_' + \
             '-'.join('-'.join('-'.join(str(datetime.now()).split()
                                        ).split('.')).split(':')) + '.log'
 
