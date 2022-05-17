@@ -29,8 +29,6 @@ class TNPA_SerialPort:
                 data = self.serial_port.read(100)
             except: pass
 
-        print(data)
-
         try:
             self.check_cor = True
             return list(map(lambda x: float(x), str(data)[3:-4].split(', ')))
