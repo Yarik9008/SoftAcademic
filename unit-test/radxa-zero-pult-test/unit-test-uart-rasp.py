@@ -55,8 +55,8 @@ class PULT_SerialPort:
         while data == None or data == b'':
             try:
                 data = self.serial_port.readline()
-                print(str(data.decode('utf-8')))
             except: pass
+            print(data)
 
         try:
             
