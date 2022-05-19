@@ -22,6 +22,6 @@
         Для корректной работы необходима калибровка. 
     
 
-P/s 
-Более подробная инструкция по началу работы с Pi pico и micropython: 
-https://projects.raspberrypi.org/en/projects/getting-started-with-the-pico
+4) отчистить все вайлы на raspberry pico, после чего скопировать на нее все содержимое папки /SoftAcademic/pico-apparat 
+
+5) после окончаания загрузки скрипт будет запускаться автоматически при подключении питания в плате 

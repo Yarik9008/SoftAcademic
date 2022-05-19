@@ -25,7 +25,11 @@
 
         nmcli dev wifi
 
-        nmcli dev wifi connect "wifi_name" password "wifi_password"
+        (подключение к интернету общая структура комманды)
+        sudo nmcli dev wifi connect "wifi_name" password "wifi_password"
+
+        (у нас)
+        sudo nmcli dev wifi connect R2D2 password 0987654321
 
         ifconfig
 
@@ -35,7 +39,8 @@
 
         git clone https://github.com/Yarik9008/SoftAcademic
 
-    2) установка библиотеки для джойстика 
+    2) установка библиотеки для джойстика
+
         sudo apt install python3-pip
 
         sudo pip3 install pygame 
@@ -43,8 +48,7 @@
         sudo pip3 install pyserial
 
     3) подключение джойстика 
-        # перевести джойстик в режим сопряжения 
-
+         
         bluetoothctl
 
         power on 
@@ -52,25 +56,53 @@
         agent on
  
         default-agent
- 
+
+        # перевести джойстик в режим сопряжения
+
         scan on
+
+        # надо найти джойскик и подставить его мак адрес в три команды ниже (без скобочек)
  
         pair <mac>
  
         connect <mac>
  
-        trust <>
+        trust <mac>
 
     4) включение uart
 
         sudo nano /boot/uEnv.txt
-        
+
         # заменить следующие строки 
         overlays=meson-g12a-uart-ao-a-on-gpioao-0-gpioao-1 meson-g12a-uart-ao-b-on-gpioao-2-gpioao-3
         console=
 
 
-3) добавление в автозапуск 
-    sudo crontab -e 
-    1
-    @reboot sleep 5 && /usr/bin/python3 /home/rock/SoftAcademic/raspberry-pult/main_pult.py &
+    5) добавление в автозапуск 
+
+        sudo apt-get install cron
+
+        sudo crontab -e 
+
+        1
+
+        # добавить с конец файла
+
+        @reboot sleep 5 && /usr/bin/python3 /home/rock/SoftAcademic/raspberry-pult/main_pult.py &
+
+3) (опционально) настройка коофицентов движителей
+    # переходим в директорию с конфигом 
+
+    cd SoftAcademic/raspberry-pult/
+
+    # открываем конфиг для редактирования 
+
+    sudo nano config_rov.ini
+
+    # закрываем и сохраняем изменения 
+
+    Ctrl + x
+    y
+    
+
+

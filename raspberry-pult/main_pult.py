@@ -254,8 +254,7 @@ class PULT_SerialPort:
             data = self.serial_port.readline()
 
         try:
-            dataout = list(
-                map(lambda x: float(x), str(data)[3:-4].split(', ')))
+            dataout = list(map(lambda x: float(x), str(data)[3:-4].split(', ')))
         except:
             self.logger.warning('Error converting data')
             return None
